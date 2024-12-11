@@ -1,0 +1,27 @@
+﻿@model BincomElectionProject.DTOs.AddResultDto
+
+@{
+    ViewData["Title"] = "Add Polling Unit Result";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Add Polling Unit Result</h2>
+
+    <form method="post" asp-controller="PollingUnit" asp-action="AddPollingUnitResult">
+        <div class="mb-3">
+            <label for="PollingUnitUniqueId" class="form-label">Polling Unit Unique ID</label>
+            <input type="number" class="form-control" id="PollingUnitUniqueId" name="PollingUnitUniqueId" required />
+        </div>
+        <div class="mb-3">
+            <label for="Party" class="form-label">Party</label>
+            <input type="text" class="form-control" id="Party" name="Party" required />
+        </div>
+        <div class="mb-3">
+            <label for="Score" class="form-label">Score</label>
+            <input type="number" class="form-control" id="Score" name="Score" required />
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+    <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+</div>

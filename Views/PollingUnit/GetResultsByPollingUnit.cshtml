@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BincomElectionProject.DTOs.PollingUnitResultDto>
+
+@{
+    // Layout = null; // Disable layout for this view
+    ViewData["Title"] = "Polling Unit Results";
+}
+
+<div class="container mt-5" style="max-width: 1200px;">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="text-center mb-5">
+                <h2 style="color: #0056b3; font-weight: bold; font-size: 2.5rem;">Search Polling Unit Results</h2>
+            </div>
+
+            <!-- Search Form -->
+            <form method="get" action="/PollingUnit/SearchResults" class="card p-5 shadow-lg border-0" style="background: #f0f8ff; border-radius: 15px;">
+                <div class="form-group mb-4">
+                    <label for="PollingUnitId" class="form-label" style="font-weight: bold; color: #333; font-size: 1.2rem;">Enter Polling Unit ID:</label>
+                    <input type="number"
+                           class="form-control"
+                           id="PollingUnitId"
+                           name="PollingUnitId"
+                           placeholder="Enter Polling Unit ID..."
+                           min="1"
+                           required
+                           style="border: 2px solid #007bff; border-radius: 8px; padding: 0.6rem; font-size: 1rem;" />
+                </div>
+                <button type="submit" class="btn btn-primary w-100" style="padding: 0.8rem; font-size: 1.2rem; border-radius: 10px; background-color: #007bff;">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <hr class="my-5" style="border-top: 3px solid #ccc;" />
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center mb-4">
+                    <h3 style="color: #28a745; font-weight: bold; font-size: 1.8rem;">Results for Polling Unit ID: @Model.First().PollingUnitId</h3>
+                </div>
+                <table class="table table-bordered table-hover" style="background: #ffffff; border-radius: 10px; overflow: hidden; font-size: 1.1rem;">
+                    <thead class="text-white" style="background: #0056b3;">
+                        <tr>
+                            <th>Polling Unit ID</th>
+                            <th>Party</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var result in Model)
+                        {
+                            <tr style="background: #f9f9f9;">
+                                <td>@result.PollingUnitId</td>
+                                <td>@result.Party</td>
+                                <td>@result.Score</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else if (Model != null)
+    {
+        <div class="alert alert-warning text-center mt-4" style="font-size: 1.2rem; background: #ffefc7; border: 1px solid #ffd966; color: #856404;">
+            No results found. Please check the Polling Unit ID or try again.
+        </div>
+    }
+
+    <!-- Back to Home Button -->
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <a href="/" class="btn btn-secondary" style="padding: 0.8rem 2rem; font-size: 1.2rem; border-radius: 10px;">
+                Back to Home
+            </a>
+        </div>
+    </div>
+</div>
